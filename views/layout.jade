@@ -1,0 +1,22 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')				
+	body
+		table(width="100%")
+			tr
+				td(colspan="2") <img src="/images/helvar.png">
+				td(colspan="3") 
+					h1 Welcome to Helvar API
+					p Currenly connected to workgroup <b>#{workgroup} on adres #{ip}</b>
+			tr
+				td 
+					<a href='/'>Home</a>
+				td 
+					<a href='/groups'>Groups</a>
+				td
+					<a href='/commands'>Commands</a>
+				td
+				td
+		block content

@@ -1,0 +1,41 @@
+extends layout
+
+block content
+	h1.
+		Commands List 
+	h2.
+		Inputs
+	table(border="1")
+		thead
+			tr
+				th Number
+				th Lettercode
+				th Command
+				th(colspan="5") Parameters
+				
+		tbody
+		each keyIn in jsonInput
+			tr 
+				td(align="center")!{keyIn.Command}
+				td(align="center")!{keyIn.LetterCode}
+				td!{keyIn.Name}
+				each key in keyIn.Parameters
+					td!{key.toString()}
+	h2.
+		Query's
+	table(border="1")
+		thead
+			tr
+				th Number
+				th Lettercode
+				th Command
+				th(colspan="5") Parameters
+		tbody
+		each keyOut in jsonOutput
+			tr 
+				td(align="center")!{keyOut.Command}
+				td(align="center")!{keyOut.LetterCode}		
+				td!{keyOut.Name}
+				each key2 in keyOut.Parameters
+					td!{key2.toString()}
+	

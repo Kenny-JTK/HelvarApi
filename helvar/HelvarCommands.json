@@ -1,0 +1,556 @@
+{
+    "input": [
+    {
+        "Name": "Recall Scene Group",
+        "Command": 11,
+        "Parameters":
+        {
+            "Group": "G",
+            "Block": "B",
+            "Scene": "S",
+            "Fade": "F",
+            "CL": "K"
+        },
+        "LetterCode": "RSG"
+    },
+    {
+        "Name": "Recall Scene Device",
+        "Command": 12,
+        "Parameters":
+        {
+            "Address": "@1.2.3.4",
+            "Block": "B",
+            "Scene": "S",
+            "Fade": "F"
+        },
+        "LetterCode": "RSD"
+    },
+    {
+        "Name": "Direct Level Group",
+        "Command": 13,
+        "Parameters":
+        {
+            "Group": "G",
+            "Level": "L",
+            "Fade": "F"
+        },
+        "LetterCode": "DLG"
+    },
+    {
+        "Name": "Direct Level Device",
+        "Command": 14,
+        "Parameters":
+        {
+            "Address": "@1.2.3.4",
+            "Level": "L",
+            "Fade": "F"
+        },
+        "LetterCode": "DLD"
+    },
+    {
+        "Name": "Direct Proportion Group",
+        "Command": 15,
+        "Parameters":
+        {
+            "Group": "G",
+            "Proportion": "P",
+            "Fade": "F"
+        },
+        "LetterCode": "DPG"
+    },
+    {
+        "Name": "Direct Proportion Device",
+        "Command": 16,
+        "Parameters":
+        {
+            "Address": "@1.2.3.4",
+            "Proportion": "P",
+            "Fade": "F"
+        },
+        "LetterCode": "DPD"
+    },
+    {
+        "Name": "Modify Proportion Group",
+        "Command": 17,
+        "Parameters":
+        {
+            "Group": "G",
+            "Proportion": "P",
+            "Fade": "F"
+        },
+        "LetterCode": "MPG"
+    },
+    {
+        "Name": "Modify Proportion Device",
+        "Command": 18,
+        "Parameters":
+        {
+            "Address": "@1.2.3.4",
+            "Proportion": "P",
+            "Fade": "F"
+        },
+        "LetterCode": "MPD"
+    },
+    {
+        "Name": "Emergency Function Test Group",
+        "Command": 19,
+        "Parameters":
+        {
+            "Group": "G"
+        },
+        "LetterCode": "ETG"
+    },
+    {
+        "Name": "Emergency Function Test Device",
+        "Command": 20,
+        "Parameters":
+        {
+            "Address": "@1.2.3.4"
+        },
+        "LetterCode": "ETD"
+    },
+    {
+        "Name": "Emergency Duration Test Group",
+        "Command": 21,
+        "Parameters":
+        {
+            "Group": "G"
+        },
+        "LetterCode": "EDG"
+    },
+    {
+        "Name": "Emergency Duration Test Device",
+        "Command": 22,
+        "Parameters":
+        {
+            "Address": "@1.2.3.4"
+        },
+        "LetterCode": "EDD"
+    },
+    {
+        "Name": "Stop Emergency Test Group",
+        "Command": 23,
+        "Parameters":
+        {
+            "Group": "G"
+        },
+        "LetterCode": "SEG"
+    },
+    {
+        "Name": "Stop Emergency Test Device",
+        "Command": 24,
+        "Parameters":
+        {
+            "Address": "@1.2.3.4"
+        },
+        "LetterCode": "SED"
+    }],
+    "Output": [
+        {
+            "Name": "Query Clusters",
+            "Command": "101",
+            "Parameters": "",
+            "LetterCode": "QC"
+        },
+        {
+            "Name": "Query Routers",
+            "Command": "102",
+            "Parameters":
+            {
+                "Cluster": "@255"
+            },
+            "LetterCode": "QR"
+        },
+        {
+            "Name": "Query Last Scene in Block",
+            "Command": "103",
+            "Parameters":
+            {
+                "Group": "G",
+                "Block": "B"
+            },
+            "LetterCode": "QLSB"
+        },
+        {
+            "Name": "Query Last Scene in Group",
+            "Command": "109",
+            "Parameters":
+            {
+                "Group": "G"
+            },
+            "LetterCode": "QLSG"
+        },
+        {
+            "Name": "Query Device Type",
+            "Command": "104",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QDT"
+        },
+        {
+            "Name": "Query Device Types and Adresses",
+            "Command": "100",
+            "Parameters":
+            {
+                "Address": "@1.2.3"
+            },
+            "LetterCode": "QDTA"
+        },
+        {
+            "Name": "Query Discription Group",
+            "Command": "105",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QDG"
+        },
+        {
+            "Name": "Query Discription Device",
+            "Command": "106",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QDD"
+        },
+        {
+            "Name": "Query Workgroup Name UDP",
+            "Command": "107",
+            "Parameters":
+            {
+                "Host": "255.255.255.255",
+                "Port": "50001"
+            },
+            "LetterCode": "QW"
+        },
+        {
+            "Name": "Query Workgroup Membership",
+            "Command": "108",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QWM"
+        },
+        {
+            "Name": "Query Groups",
+            "Command": "165",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QGS"
+        },
+        {
+            "Name": "Query Group",
+            "Command": "164",
+            "Parameters":
+            {
+                "Group": "G"
+            },
+            "LetterCode": "QG"
+        },
+        {
+            "Name": "Query Scene Names",
+            "Command": "166",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QSN"
+        },
+        {
+            "Name": "Query Scene Info",
+            "Command": "167",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QSI"
+        },
+        {
+            "Name": "Query Lamp Running Hours",
+            "Command": "70",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QLRH"
+        },
+        {
+            "Name": "Query Ballast Running Hours",
+            "Command": "71",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QBRH"
+        },
+        {
+            "Name": "Query Maximum Voltage",
+            "Command": "72",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QMxV"
+        },
+        {
+            "Name": "Query Minimum Voltage",
+            "Command": "73",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QMnV"
+        },
+        {
+            "Name": "Query Maximum Temperature",
+            "Command": "74",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QMxT"
+        },
+        {
+            "Name": "Query Minimum Temperature",
+            "Command": "75",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QMnT"
+        },
+        {
+            "Name": "Query Device State",
+            "Command": "110",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QDS"
+        },
+        {
+            "Name": "Query Device is  Disabled",
+            "Command": "111",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QDD"
+        },
+        {
+            "Name": "Query Lamp Failure",
+            "Command": "112",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QLF"
+        },
+        {
+            "Name": "Query Device is Missing",
+            "Command": "113",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QDM"
+        },
+        {
+            "Name": "Query Device is Faulty",
+            "Command": "114",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QDF"
+        },
+        {
+            "Name": "Query Emergency Battery Failure",
+            "Command": "129",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QEBF"
+        },
+        {
+            "Name": "Query Measurement",
+            "Command": "150",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QM"
+        },
+        {
+            "Name": "Query Inputs",
+            "Command": "151",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4",
+                "Subdevice": "5"
+            },
+            "LetterCode": "QI"
+        },
+        {
+            "Name": "Query Load Level",
+            "Command": "152",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QLL"
+        },
+        {
+            "Name": "Query Power Consumption",
+            "Command": "160",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QPC"
+        },
+        {
+            "Name": "Query Group Power Consumption",
+            "Command": "161",
+            "Parameters":
+            {
+                "Group": "G"
+            },
+            "LetterCode": "QGPC"
+        },
+        {
+            "Name": "Query Emergency Function Test Time",
+            "Command": "170",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QEFTT"
+        },
+        {
+            "Name": "Query Emergency Function Test State",
+            "Command": "171",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QEFTS"
+        },
+        {
+            "Name": "Query Emergency Duration Test Time",
+            "Command": "172",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QEDTT"
+        },
+        {
+            "Name": "Query Emergency Duration Test State",
+            "Command": "173",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QEDTS"
+        },
+        {
+            "Name": "Query Emergency Battery Charge",
+            "Command": "174",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QEBC"
+        },
+        {
+            "Name": "Query Emergency Battery Time",
+            "Command": "175",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QEBT"
+        },
+        {
+            "Name": "Query Emergency Total Lamp Time",
+            "Command": "176",
+            "Parameters":
+            {
+                "Address": "@1.2.3.4"
+            },
+            "LetterCode": "QETLT"
+        },
+        {
+            "Name": "Query Time",
+            "Command": "185",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QT"
+        },
+        {
+            "Name": "Query Longitude",
+            "Command": "186",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QLONG"
+        },
+        {
+            "Name": "Query Latitude",
+            "Command": "187",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "Qlat"
+        },
+        {
+            "Name": "Query Time Zone",
+            "Command": "188",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QTZ"
+        },
+        {
+            "Name": "Query Daylight Savings Time",
+            "Command": "189",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QDST"
+        },
+        {
+            "Name": "Query Software Version",
+            "Command": "190",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QSV"
+        },
+        {
+            "Name": "Query Helvarnet Version",
+            "Command": "191",
+            "Parameters":
+            {
+                "None": "None"
+            },
+            "LetterCode": "QHV"
+        }
+
+    ]
+}

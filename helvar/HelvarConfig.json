@@ -1,0 +1,9 @@
+{"debug" : "true" ,
+"HelvarHost" : "",
+"HelvarPortTCP" : 50000,
+"HelvarPortUDP" : 50001,
+"HelvarWebPort":5000,
+"RestPort" : 3001,
+"WorkGroup" : "untitled",
+"Ibasx" : ["1","16000","16001","16002"]
+}

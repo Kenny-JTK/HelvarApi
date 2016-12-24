@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	h1.
+		Groups
+	h2.
+		Inputs
+	table(border="1")
+		thead
+			tr
+				th Number
+				th Lettercode
+				th Command
+				th(colspan="5") Parameters
+				
+		tbody
+		each keyIn in groupsIn
+			tr 
+				td(align="center")!{keyIn}
+				td(align="center")!{keyIn}
+				td!{keyIn.Name}
