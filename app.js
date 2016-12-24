@@ -20,7 +20,6 @@ var dbinfo = new jsondb("./data/info",true,false);
 //var dbinfo = nanodb.db.use('info');
 //console.log("test" + HelvarConfig.Ibasx);
 
-
 //variables
 var debug = HelvarConfig.debug
 var HelvarHost = HelvarConfig.HelvarHost;
