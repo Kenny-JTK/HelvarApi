@@ -120,7 +120,6 @@ WorkGroupDiscover();
 dbcomm.push('/commands',HelvarComm);
 
 
-
 // open tcpssocket to Helvar Router
 function HelvarTcpConn(){
 	
