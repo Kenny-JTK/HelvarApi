@@ -68,6 +68,22 @@ function WorkGroupDiscover(){
 	clientDiscover.bind(4250,"255.255.255.255");
 };	
 	
+
+//send Workgroup Name request
+function WorkgroupRequest(){
+	var cmd=">V:1,C:107#";
+	var WorkGroupCmd = new Buffer(">V:1,C:107#","ascii");
+
+	var UDPsocket = new udp.createSocket("udp4");
+	
+	UDPsocket.send(WorkGroupCmd, 0, WorkGroupCmd.length,HelvarPortUDP,HelvarHost,function (err,bytes){
+		//if (err) throw {print(err)};
+		print("Helvar : UDP Name Command Send");
+		});
+	
+	                                                                                                 
+}; 
+
 //Get WorkgroupName
 function WorkGroupName(){	
 
@@ -95,21 +111,6 @@ function WorkGroupName(){
 
 		clientUDP.bind(HelvarPortUDP);
 };
-
-//send Workgroup Name request
-function WorkgroupRequest(){
-	var cmd=">V:1,C:107#";
-	var WorkGroupCmd = new Buffer(">V:1,C:107#","ascii");
-
-	var UDPsocket = new udp.createSocket("udp4");
-	
-	UDPsocket.send(WorkGroupCmd, 0, WorkGroupCmd.length,HelvarPortUDP,HelvarHost,function (err,bytes){
-		//if (err) throw {print(err)};
-		print("Helvar : UDP Name Command Send");
-		});
-	
-	                                                                                                 
-}; 
 
 WorkGroupDiscover();
 	
