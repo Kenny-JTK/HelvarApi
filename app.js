@@ -185,7 +185,19 @@ function handlerTCP(data){
 var HVN = express(); // HVN = HelvarNet APIinterface socket
 
 var server= HVN.listen(RestPort,function(){print("Helvar : Rest-API Listening on port " + RestPort)});
+//make request body json object
+HVN.use(bodyParser.urlencoded({
+    extended: true
+}));
+HVN.use(bodyParser.json());
 
+HVN.post('/DLG', function (req, res) {
+    var msg = (">V:2,C:13,G:" + req.body.group + ",L=" + req.body.level + "#");
+    //client.write(msg);
+    print(msg);
+    //CHANGE ADDRESS is required, this only works on localhost + port from config file to use
+    res.redirect("http://127.0.0.1:5000/groups");
+});
 HVN.get('/uit', function(req,res){
 	client.write(MSGuit);
 	setTimeout(function(){

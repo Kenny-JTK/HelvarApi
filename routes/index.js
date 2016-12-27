@@ -24,7 +24,7 @@ router.get('/commands', function(req,res){
 });
 
 router.get('/groups', function(req,res){
-	var groups=dbinfo.getData("/groups");	
-	res.render('groups',{title: Dalititle, name: Daliother, workgroup:Daligroup, ip:Dalirouter,groupsIN : groups});
+	var groepen=dbinfo.getData("/groups");	
+	res.render('groups',{title: Dalititle, name: Daliother, workgroup:Daligroup, ip:Dalirouter, groupsIN : groepen});
 });
 module.exports = router;

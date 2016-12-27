@@ -1,21 +1,24 @@
 extends layout
 
 block content
-	h1.
-		Groups
-	h2.
-		Inputs
-	table(border="1")
-		thead
-			tr
-				th Number
-				th Lettercode
-				th Command
-				th(colspan="5") Parameters
-				
-		tbody
-		each keyIn in groupsIn
-			tr 
-				td(align="center")!{keyIn}
-				td(align="center")!{keyIn}
-				td!{keyIn.Name}
+    h1.
+        Groups
+    h2.
+        Inputs
+    table(border="1" align="center")
+        thead
+            tr
+                th Group
+                th Name
+                th Command
+        tbody
+        each key in groupsIN
+            tr 
+                td(align="center")!{key.toString()}
+                td
+                td
+                    form(method="POST", action="http://127.0.0.1:3001/DLG")
+                        input(type="hidden", name="_method" , value="PUT")
+                        input(type="hidden", name="group" , value= "#{key}")
+                        input(type="number", name="level", min="0", max="100", required)
+                        input(type="submit")
