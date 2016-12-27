@@ -25,6 +25,7 @@ var debug = HelvarConfig.debug
 var HelvarHost = HelvarConfig.HelvarHost;
 var HelvarPortTCP = HelvarConfig.HelvarPortTCP;
 var HelvarPortUDP = HelvarConfig.HelvarPortUDP;
+var HelvarWebPort = HelvarConfig.HelvarWebPort;
 var RestPort = HelvarConfig.RestPort;
 var WorkGroup = HelvarConfig.WorkGroup;
 var MSGuit = ">V:1,C:11,L:0,G:1,B:1,S:15,F:0#";
@@ -35,6 +36,7 @@ var DiscoveredIp = [];
 var app = express();
 var routes= require('./routes/index');
 var users = require('./routes/users');
+
 
 //Debug info
 function print(msg){
@@ -64,8 +66,9 @@ function WorkGroupDiscover(){
 			print("Helvar : UDP Discover Closed");
 			WorkGroupName()
 			};
-		});
-	clientDiscover.bind(4250,"255.255.255.255");
+    });
+    //used to be clientDiscover.bind(4250,"255.255.255.255") 4250=Designer Port van de routers
+	clientDiscover.bind(4250);
 };	
 	
 
@@ -179,7 +182,7 @@ function handlerTCP(data){
 //end handle
 
 //Webinterface
-var HVN = express(); // HVN = HelvarNet webinterface socket
+var HVN = express(); // HVN = HelvarNet APIinterface socket
 
 var server= HVN.listen(RestPort,function(){print("Helvar : Rest-API Listening on port " + RestPort)});
 
@@ -232,5 +235,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+app.listen(HelvarWebPort, function (){
+    print("Helvar : Helvar Web Interface available on port " + HelvarWebPort)
+});
 module.exports = app;
