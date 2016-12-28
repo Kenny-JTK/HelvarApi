@@ -126,30 +126,30 @@ dbcomm.push('/commands',HelvarComm);
 
 // open tcpssocket to Helvar Router
 function HelvarTcpConn(){
-	
-	var jsonObj; //variabele met json string van listen
+ 
+    var jsonObj; //variabele met json string van listen
 
-	var client = new net.Socket(); // open een nieuwe socket
+    var client = new net.Socket(); // open een nieuwe socket
 
-	client.setEncoding('utf8'); // set communicatie taal 
-	
-	client.connect(HelvarPortTCP,HelvarHost,function(err){
-		if (err){
-			print("tcp error" + err);
-		}else {
-		print('Helvar : Connected to Router : '+ HelvarHost);
-		//DO Query Groups
-		client.write(">V:2,C:165#");
-		};
-	});
-	
-	client.on('data', function(data){
-		handlerTCP(data);
-	});
+    client.setEncoding('utf8'); // set communicatie taal 
 
-	client.on('close',function(){
-		print('connection closed');
-	});
+    client.connect(HelvarPortTCP, HelvarHost, function (err) {
+        if (err) {
+            print("tcp error" + err);
+        } else {
+            print('Helvar : Connected to Router : ' + HelvarHost);
+            //DO Query Groups
+            client.write(">V:2,C:165#");
+        };
+    });
+
+    client.on('data', function (data) {
+        handlerTCP(data);
+    });
+
+    client.on('close', function () {
+        print('HELVAR : TCP Client connection closed');
+    });  
 };
 
 //handle all incommming tcp data
@@ -198,6 +198,7 @@ HVN.post('/DLG', function (req, res) {
     //CHANGE ADDRESS is required, this only works on localhost + port from config file to use
     res.redirect("http://127.0.0.1:5000/groups");
 });
+
 HVN.get('/uit', function(req,res){
 	client.write(MSGuit);
 	setTimeout(function(){
