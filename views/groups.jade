@@ -10,7 +10,7 @@ block content
             tr
                 th Group
                 th Name
-                th Command
+                th Direct Level Group
         tbody
         each key in groupsIN
             tr 
@@ -20,5 +20,5 @@ block content
                     form(method="POST", action="http://127.0.0.1:3001/DLG")
                         input(type="hidden", name="_method" , value="PUT")
                         input(type="hidden", name="group" , value= "#{key}")
-                        input(type="number", name="level", min="0", max="100", required)
+                        input(type="number", name="level", min="0", max="100", required, title="Set level (0-100%) for group")
                         input(type="submit")

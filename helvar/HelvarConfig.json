@@ -3,7 +3,7 @@
 "HelvarPortTCP" : 50000,
 "HelvarPortUDP" : 50001,
 "HelvarWebPort":5000,
-"RestPort" : 3001,
+"RestPort" : 5001,
 "WorkGroup" : "untitled",
 "Ibasx" : ["1","16000","16001","16002"]
 }

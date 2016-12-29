@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var ip = require('ip');
 
 // custom modules
 var net = require('net'); // module voor tcp communicatie
@@ -129,7 +130,7 @@ function HelvarTcpConn(){
  
     var jsonObj; //variabele met json string van listen
 
-    var client = new net.Socket(); // open een nieuwe socket
+    global.client = new net.Socket(); // open een nieuwe socket
 
     client.setEncoding('utf8'); // set communicatie taal 
 
@@ -181,8 +182,8 @@ function handlerTCP(data){
 	};
 //end handle
 
-//Webinterface
-var HVN = express(); // HVN = HelvarNet APIinterface socket
+//REST interface
+var HVN = express(); // HVN = HelvarNet REST-API interface socket
 
 var server= HVN.listen(RestPort,function(){print("Helvar : Rest-API Listening on port " + RestPort)});
 //make request body json object
@@ -192,8 +193,8 @@ HVN.use(bodyParser.urlencoded({
 HVN.use(bodyParser.json());
 
 HVN.post('/DLG', function (req, res) {
-    var msg = (">V:2,C:13,G:" + req.body.group + ",L=" + req.body.level + "#");
-    //client.write(msg);
+    var msg = (">V:2,C:13,G:" + req.body.group + ",L:" + req.body.level + "#");
+    client.write(msg);
     print(msg);
     //CHANGE ADDRESS is required, this only works on localhost + port from config file to use
     res.redirect("http://127.0.0.1:5000/groups");
