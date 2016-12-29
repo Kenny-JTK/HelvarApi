@@ -17,7 +17,7 @@ block content
                 td(align="center")!{key.toString()}
                 td
                 td
-                    form(method="POST", action="http://127.0.0.1:3001/DLG")
+                    form(method="POST", action="#{ApiUrl}")
                         input(type="hidden", name="_method" , value="PUT")
                         input(type="hidden", name="group" , value= "#{key}")
                         input(type="number", name="level", min="0", max="100", required, title="Set level (0-100%) for group")

@@ -19,7 +19,7 @@ var dbinfo = new jsondb("./data/info",true,false);
 //var nanodb = new nano('http://localhost:5984');
 //var dbgroup = nanodb.db.use('groups');
 //var dbinfo = nanodb.db.use('info');
-//console.log("test" + HelvarConfig.Ibasx);
+console.log("test ip : " + ip.address());
 
 //variables
 var debug = HelvarConfig.debug
@@ -32,6 +32,7 @@ var WorkGroup = HelvarConfig.WorkGroup;
 var MSGuit = ">V:1,C:11,L:0,G:1,B:1,S:15,F:0#";
 var MSGaan = ">V:1,C:11,L:0,G:1,B:1,S:1,F:0#";
 var DiscoveredIp = [];
+var ipAddress = ip.address()
 
 //start
 var app = express();
@@ -47,34 +48,61 @@ function print(msg){
 };
 	
 //HELVARNET 
-
 //Start : Workgroup Discover
-function WorkGroupDiscover(){
-	
+
+function WorkGroupDiscover(){	
 	/*
 	 * Maak een lijst met alle gevonden ipadressen die reageren op multicast
 	*/
-	
 	var clientDiscover = new udp.createSocket("udp4");
-	print("Helvar : UDP Discover Started");
-	clientDiscover.on('message',function(message,info){
-		
-		if (HelvarHost == ""||HelvarHost== null){
-			print("Helvar : UDP Discover : Found router @ " +info.address);
-			HelvarHost = info.address.toString("utf8");
-		}else{
-			clientDiscover.close();
-			print("Helvar : UDP Discover Closed");
-			WorkGroupName()
-			};
+    print("Helvar : UDP Discover Started");
+
+    clientDiscover.on('message', function (message, info) {
+        if (info.address != ipAddress) {
+            if (HelvarHost == "" || HelvarHost == null) {
+                print("Helvar : UDP Discover : Found router @ " + info.address);
+                HelvarHost = info.address.toString("utf8");
+            } else {
+                clientDiscover.close();
+                print("Helvar : UDP Discover Closed");
+                WorkGroupName()
+            };
+        }
     });
     //used to be clientDiscover.bind(4250,"255.255.255.255") 4250=Designer Port van de routers
 	clientDiscover.bind(4250);
 };	
 	
+//Get WorkgroupName
+function WorkGroupName(){	
+
+		var clientUDP = new udp.createSocket("udp4");
+
+		clientUDP.on('listening', function(){
+			var listening= clientUDP.address();
+			WorkGroupRequest();
+			print("Helvar : UDP Listening on " + listening.address + " : " + listening.port);
+			});
+			
+        clientUDP.on('message', function (msg, rinfo) {
+                print("Helvar : UDP recieved from: " + rinfo.address);
+			    print("Helvar : UDP recieved from: " + rinfo.port);
+			    print("Helvar : UDP recieved from: " + msg);
+			    var msg1 = msg.toString("utf8");		// msg comes in as a buffer
+			    WorkGroup = msg1.slice((msg1.indexOf('=') + 1 ),(msg1.length - 1));
+                print("Helvar : WorkGroup set : " + WorkGroup);         
+                HelvarTcpConn();
+                clientUDP.close();
+                print("Helvar : UDP Connection Closed");
+                dbinfo.push('/workgroup', WorkGroup);
+                dbinfo.push('/router', HelvarHost);
+            }); 	
+
+		clientUDP.bind(HelvarPortUDP);
+};
 
 //send Workgroup Name request
-function WorkgroupRequest(){
+function WorkGroupRequest(){
 	var cmd=">V:1,C:107#";
 	var WorkGroupCmd = new Buffer(">V:1,C:107#","ascii");
 
@@ -83,38 +111,9 @@ function WorkgroupRequest(){
 	UDPsocket.send(WorkGroupCmd, 0, WorkGroupCmd.length,HelvarPortUDP,HelvarHost,function (err,bytes){
 		//if (err) throw {print(err)};
 		print("Helvar : UDP Name Command Send");
-		});
-	
-	                                                                                                 
+		});	                                                                                                 
 }; 
 
-//Get WorkgroupName
-function WorkGroupName(){	
-
-		var clientUDP = new udp.createSocket("udp4");
-
-		clientUDP.on('listening', function(){
-			var listening= clientUDP.address();
-			WorkgroupRequest();
-			print("Helvar : UDP Listening on " + listening.address + " : " + listening.port);
-			});
-			
-		clientUDP.on('message', function(msg,rinfo) {
-			print("Helvar : UDP recieved from: " + rinfo.address );
-			print("Helvar : UDP recieved from: " + rinfo.port);
-			print("Helvar : UDP recieved from: " + msg);
-			var msg1 = msg.toString("utf8");		// msg comes in as a buffer
-			WorkGroup = msg1.slice((msg1.indexOf('=') + 1 ),(msg1.length - 1));
-			print("Helvar : WorkGroup set : " + WorkGroup);
-			HelvarTcpConn();
-			clientUDP.close();
-			print("Helvar : UDP Connection Closed");
-			dbinfo.push('/workgroup',WorkGroup);
-			dbinfo.push('/router',HelvarHost);
-			   }); 	
-
-		clientUDP.bind(HelvarPortUDP);
-};
 
 WorkGroupDiscover();
 	
@@ -138,9 +137,10 @@ function HelvarTcpConn(){
         if (err) {
             print("tcp error" + err);
         } else {
-            print('Helvar : Connected to Router : ' + HelvarHost);
+            print('Helvar : TCP client connected to router : ' + HelvarHost);
             //DO Query Groups
-            client.write(">V:2,C:165#");
+            client.write(">V:1,C:165#");
+            print("Group request send");
         };
     });
 
@@ -165,13 +165,14 @@ function handlerTCP(data){
 		if (data.indexOf('=')>-1) {
 			data = data.replace('=','","response":["');
 			data = data.replace('}',']}');
-			return data
 			};
-		jsonObj=(JSON.parse(data));
-		print("Helvar : MSG recv. :" + jsonObj);
-		//query groups
+        jsonObj = JSON.parse(data);
+        print("Helvar : MSG recv. :" + data);
+		//Handle Query groups
 		if (jsonObj.C==165){
-			dbinfo.push('/groups',{"groups":jsonObj.response});
+            dbinfo.push('/groups', { "groups": jsonObj.response });
+            //DO Query Group Names
+            jsonObj.response.forEach(function (value) {client.write(">V:1,C:105,G:"+value+"#") });
 			};
 		
 		if (HelvarConfig.Ibasx.indexOf(jsonObj.G) >= 0 && jsonObj.C == 11){
@@ -195,9 +196,8 @@ HVN.use(bodyParser.json());
 HVN.post('/DLG', function (req, res) {
     var msg = (">V:2,C:13,G:" + req.body.group + ",L:" + req.body.level + "#");
     client.write(msg);
-    print(msg);
-    //CHANGE ADDRESS is required, this only works on localhost + port from config file to use
-    res.redirect("http://127.0.0.1:5000/groups");
+    print("Helvar : Rest API command send (DLG) : "+msg);
+    res.redirect("http://" + ip.address + ":" + HelvarWebPort + "/groups");
 });
 
 HVN.get('/uit', function(req,res){
