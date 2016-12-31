@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var jsondb = require('node-json-db');
+var ip = require('ip');
 var db = new jsondb("./data/commands");
 var dbinfo = new jsondb("./data/info");
-var ip = require('ip');
 var dbconfig = new jsondb('./helvar/HelvarConfig');
+var dbworkgroup = new jsondb("./data/workgroup", true, false);
 
 //for all views
 var Dalititle = "Helvar API";
@@ -27,7 +28,7 @@ router.get('/commands', function(req,res){
 });
 // GET Groups Page
 router.get('/groups', function(req,res){
-    var groepen = dbinfo.getData("/groups");
+    var groepen = dbworkgroup.getData("/groups");
     
     var Rest = "HTTP://" + UrlIp + ":" + RestPort + "/DLG";
     res.render('groups', { title: Dalititle, name: Daliother, workgroup: Daligroup, ip: Dalirouter, groupsIN: groepen, ApiUrl: Rest });

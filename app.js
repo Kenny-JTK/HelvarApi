@@ -15,11 +15,7 @@ var HelvarConfig = require("./helvar/HelvarConfig.json"); //import configuratie 
 var jsondb= require('node-json-db');
 var dbcomm = new jsondb("./data/commands",true,false);
 var dbinfo = new jsondb("./data/info",true,false);
-//var nano = require('nano');
-//var nanodb = new nano('http://localhost:5984');
-//var dbgroup = nanodb.db.use('groups');
-//var dbinfo = nanodb.db.use('info');
-console.log("test ip : " + ip.address());
+var dbworkgroup = new jsondb("./data/workgroup", true, false);
 
 //variables
 var debug = HelvarConfig.debug
@@ -171,10 +167,15 @@ function handlerTCP(data){
 		//Handle Query groups
 		if (jsonObj.C==165){
             dbinfo.push('/groups', { "groups": jsonObj.response });
-            //DO Query Group Names
-            jsonObj.response.forEach(function (value) {client.write(">V:1,C:105,G:"+value+"#") });
-			};
-		
+            //DO Query Group Names( with a interval of 500ms each)
+            jsonObj.response.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:105,G:" + value + "#") },500*index)});
+        };
+        //Handle Query Groep Names
+        if (jsonObj.C == 105) {
+            dbworkgroup.push('/groups/' + jsonObj.G, { "groupnumber": jsonObj.G, "groupname": jsonObj.response });                
+        };
+
+		//Check if message is from an IBASX group
 		if (HelvarConfig.Ibasx.indexOf(jsonObj.G) >= 0 && jsonObj.C == 11){
 			print("is IBASX");
 			}else{

@@ -14,8 +14,8 @@ block content
         tbody
         each key in groupsIN
             tr 
-                td(align="center")!{key.toString()}
-                td
+                td(align="center")!{key.groupnumber.toString()}
+                td(align="center")!{key.groupname.toString()}
                 td
                     form(method="POST", action="#{ApiUrl}")
                         input(type="hidden", name="_method" , value="PUT")
