@@ -29,6 +29,7 @@ var MSGuit = ">V:1,C:11,L:0,G:1,B:1,S:15,F:0#";
 var MSGaan = ">V:1,C:11,L:0,G:1,B:1,S:1,F:0#";
 var DiscoveredIp = [];
 var ipAddress = ip.address()
+var groups;
 
 //start
 var app = express();
@@ -171,14 +172,17 @@ function handlerTCP(data){
             client.write(">V:1,C:108#");
         };
         //Handle Query Routers
-        if (jsonObj.C == 108) {
+        if (jsonObj.C == 165) {
             dbinfo.push('/routers', jsonObj.response);
             //DO Query Group Names( with a interval of 500ms each)
             jsonObj.response.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:105,G:" + value + "#") }, 500 * index) });
         };
         //Handle Query Groep Names
         if (jsonObj.C == 105) {
-            dbworkgroup.push('/groups/' + jsonObj.G, { "groupnumber": jsonObj.G, "groupname": jsonObj.response }); 
+            dbworkgroup.push('/groups/' + jsonObj.G, { "groupnumber": jsonObj.G, "groupname": jsonObj.response });
+            if (jsonObj.G == dbinfo.getData('/groups/groups[-1]')) {
+                console.log("last response");
+            }
         };
 
 		//Check if message is from an IBASX group
