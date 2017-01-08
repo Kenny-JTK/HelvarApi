@@ -167,12 +167,18 @@ function handlerTCP(data){
 		//Handle Query groups
 		if (jsonObj.C==165){
             dbinfo.push('/groups', { "groups": jsonObj.response });
+            //DO Query Routers
+            client.write(">V:1,C:108#");
+        };
+        //Handle Query Routers
+        if (jsonObj.C == 108) {
+            dbinfo.push('/routers', jsonObj.response);
             //DO Query Group Names( with a interval of 500ms each)
-            jsonObj.response.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:105,G:" + value + "#") },500*index)});
+            jsonObj.response.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:105,G:" + value + "#") }, 500 * index) });
         };
         //Handle Query Groep Names
         if (jsonObj.C == 105) {
-            dbworkgroup.push('/groups/' + jsonObj.G, { "groupnumber": jsonObj.G, "groupname": jsonObj.response });                
+            dbworkgroup.push('/groups/' + jsonObj.G, { "groupnumber": jsonObj.G, "groupname": jsonObj.response }); 
         };
 
 		//Check if message is from an IBASX group
