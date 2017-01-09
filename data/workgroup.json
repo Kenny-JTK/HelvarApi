@@ -1,1 +1,38 @@
-{"groups":{"1":{"groupnumber":"1","groupname":["test groep 1"]},"2":{"groupnumber":"2","groupname":["inkom"]},"4":{"groupnumber":"4","groupname":["verdieping 1"]},"5":{"groupnumber":"5","groupname":["Group 5"]},"6":{"groupnumber":"6","groupname":["Group 6"]},"16000":{"groupnumber":"16000","groupname":["IBASX 1"]},"@192.168.1.10":{"groupnumber":"@192.168.1.10","groupname":["test groep 1"]}}}
+{
+  "router": {
+    "1.10": {
+      "IP": "192.168.1.10",
+      "ID": 0,
+      "Dali": "1.10",
+      "Name": "",
+      "Type": "",
+      "Subnet": ""
+    }
+  },
+  "groups": {
+    "1": {
+      "groupnumber": "1",
+      "groupname": [ "test groep 1" ]
+    },
+    "2": {
+      "groupnumber": "2",
+      "groupname": [ "inkom" ]
+    },
+    "4": {
+      "groupnumber": "4",
+      "groupname": [ "verdieping 1" ]
+    },
+    "5": {
+      "groupnumber": "5",
+      "groupname": [ "Group 5" ]
+    },
+    "6": {
+      "groupnumber": "6",
+      "groupname": [ "Group 6" ]
+    },
+    "16000": {
+      "groupnumber": "16000",
+      "groupname": [ "IBASX 1" ]
+    }
+  }
+}

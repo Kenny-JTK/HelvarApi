@@ -135,9 +135,9 @@ function HelvarTcpConn(){
             print("tcp error" + err);
         } else {
             print('Helvar : TCP client connected to router : ' + HelvarHost);
-            //DO Query Groups
-            client.write(">V:1,C:165#");
-            print("Group request send");
+            //DO Query Routers
+            client.write(">V:1,C:108#");
+            print("Routers request send");
         };
     });
 
@@ -165,23 +165,46 @@ function handlerTCP(data){
 			};
         jsonObj = JSON.parse(data);
         print("Helvar : MSG recv. :" + data);
+
+        //Handle Query Routers
+        if (jsonObj.C == 108) {
+            jsonObj.response.forEach(function (V, K) {
+                value = JSON.stringify(V);
+                value = value.replace(/"/g, '');
+                value2 = value.replace('@', '');
+                value = value.split(".");
+                value = value[2] + "." + value[3]
+                dbworkgroup.push('/router/'+ value,
+                    {
+                        "IP": value2,
+                        "ID": K,
+                        "Dali": value,
+                        "Name": "",
+                        "Type": "",
+                        "Subnet": "",
+                    });
+                //DO Query Router Type
+                setTimeout(function (value,K) { client.write(">V:2,C:104@" + value + "#") },250*K);
+                //DO Query Router Name
+                setTimeout(function (value,K) { client.write(">V:2,C:106@" + value + "#") },500*K);
+            });
+            //DO Query Groups
+            client.write(">V:1,C:165#");
+        };
+
 		//Handle Query groups
 		if (jsonObj.C==165){
             dbinfo.push('/groups', { "groups": jsonObj.response });
-            //DO Query Routers
-            client.write(">V:1,C:108#");
-        };
-        //Handle Query Routers
-        if (jsonObj.C == 165) {
-            dbinfo.push('/routers', jsonObj.response);
+
             //DO Query Group Names( with a interval of 500ms each)
             jsonObj.response.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:105,G:" + value + "#") }, 500 * index) });
         };
+
         //Handle Query Groep Names
         if (jsonObj.C == 105) {
             dbworkgroup.push('/groups/' + jsonObj.G, { "groupnumber": jsonObj.G, "groupname": jsonObj.response });
             if (jsonObj.G == dbinfo.getData('/groups/groups[-1]')) {
-                console.log("last response");
+                client.write(">V:2,C:104@");
             }
         };
 
