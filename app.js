@@ -184,14 +184,33 @@ function handlerTCP(data){
                         "Subnet": "",
                     });
                 //DO Query Router Type
-                setTimeout(function (value,K) { client.write(">V:2,C:104@" + value + "#") },250*K);
+                setTimeout(function () { client.write(">V:2,C:104@" + value + "#") }, 250 * K) ;
                 //DO Query Router Name
-                setTimeout(function (value,K) { client.write(">V:2,C:106@" + value + "#") },500*K);
+                setTimeout(function () { client.write(">V:2,C:106@" + value + "#") }, 500 * K) ;
             });
             //DO Query Groups
             client.write(">V:1,C:165#");
         };
-
+        //Handle Query Router Type
+        if (data.indexOf('104@') > -1) {
+            var address = JSON.stringify(jsonObj.C);
+            address = address.replace(/"/g, '');
+            address = address.split('@');
+            if (jsonObj.response == 905) {
+                dbworkgroup.push('/router/' + address[1] + '/Type', jsonObj.response[0]);
+                dbworkgroup.push('/router/' + address[1] + '/Subnet', "1");
+            } else {
+                dbworkgroup.push('/router/' + address[1] + '/Type', jsonObj.response[0]);
+                dbworkgroup.push('/router/' + address[1] + '/Subnet', "2");
+            };
+        };
+        //Handle Query Router Name
+        if (data.indexOf('106@') > -1) {
+            var address = JSON.stringify(jsonObj.C);
+            address = address.replace(/"/g, '');
+            address = address.split('@');
+            dbworkgroup.push('/router/' + address[1] + '/Name', jsonObj.response[0]);
+            };
 		//Handle Query groups
 		if (jsonObj.C==165){
             dbinfo.push('/groups', { "groups": jsonObj.response });
