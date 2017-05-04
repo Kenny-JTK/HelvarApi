@@ -1,5 +1,5 @@
 {"debug" : "true" ,
-"HelvarHost" : "",
+"HelvarHost" : "192.168.100.49",
 "HelvarPortTCP" : 50000,
 "HelvarPortUDP" : 50001,
 "HelvarWebPort":5000,

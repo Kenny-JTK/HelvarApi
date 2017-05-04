@@ -216,7 +216,7 @@ function handlerTCP(data){
             dbinfo.push('/groups', { "groups": jsonObj.response });
 
             //DO Query Group Names( with a interval of 500ms each)
-            jsonObj.response.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:105,G:" + value + "#") }, 500 * index) });
+            jsonObj.response.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:105,G:" + value + "#") }, 1000 * index) });
         };
 
         //Handle Query Groep Names

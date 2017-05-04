@@ -7,28 +7,248 @@
       "Name": "router 1",
       "Type": "905",
       "Subnet": "1"
+    },
+    "1.2": {
+      "IP": "192.168.1.2",
+      "ID": 0,
+      "Dali": "1.2",
+      "Name": "Kast Showroom Helvar",
+      "Type": "920",
+      "Subnet": "2"
+    },
+    "100.48": {
+      "IP": "192.168.100.48",
+      "ID": 0,
+      "Dali": "100.48",
+      "Name": "Tao Rental Werkvoorbereiding",
+      "Type": "910",
+      "Subnet": "2"
+    },
+    "100.49": {
+      "IP": "192.168.100.49",
+      "ID": 0,
+      "Dali": "100.49",
+      "Name": "",
+      "Type": "",
+      "Subnet": ""
+    },
+    "100.50": {
+      "IP": "192.168.100.50",
+      "ID": 1,
+      "Dali": "100.50",
+      "Name": "Werkkast vergaderzaal Tao",
+      "Type": "",
+      "Subnet": ""
     }
   },
   "groups": {
     "1": {
       "groupnumber": "1",
-      "groupname": [ "test groep 1" ]
+      "groupname": [ "Showroom" ]
     },
     "2": {
       "groupnumber": "2",
-      "groupname": [ "inkom" ]
+      "groupname": [ "Kantoor" ]
+    },
+    "3": {
+      "groupnumber": "3",
+      "groupname": [ "Group 3" ]
     },
     "4": {
       "groupnumber": "4",
-      "groupname": [ "verdieping 1" ]
+      "groupname": [ "Gang" ]
     },
     "5": {
       "groupnumber": "5",
-      "groupname": [ "Group 5" ]
+      "groupname": [ "Pendels" ]
     },
     "6": {
       "groupnumber": "6",
       "groupname": [ "Group 6" ]
+    },
+    "7": {
+      "groupnumber": "7",
+      "groupname": [ "Group 7" ]
+    },
+    "8": {
+      "groupnumber": "8",
+      "groupname": [ "Group 8" ]
+    },
+    "9": {
+      "groupnumber": "9",
+      "groupname": [ "Group 9" ]
+    },
+    "10": {
+      "groupnumber": "10",
+      "groupname": [ "Group 10" ]
+    },
+    "11": {
+      "groupnumber": "11",
+      "groupname": [ "Group 11" ]
+    },
+    "12": {
+      "groupnumber": "12",
+      "groupname": [ "Group 12" ]
+    },
+    "13": {
+      "groupnumber": "13",
+      "groupname": [ "Group 13" ]
+    },
+    "14": {
+      "groupnumber": "14",
+      "groupname": [ "Group 14" ]
+    },
+    "15": {
+      "groupnumber": "15",
+      "groupname": [ "Group 15" ]
+    },
+    "16": {
+      "groupnumber": "16",
+      "groupname": [ "Group 16" ]
+    },
+    "17": {
+      "groupnumber": "17",
+      "groupname": [ "Group 17" ]
+    },
+    "18": {
+      "groupnumber": "18",
+      "groupname": [ "Group 18" ]
+    },
+    "19": {
+      "groupnumber": "19",
+      "groupname": [ "Group 19" ]
+    },
+    "700": {
+      "groupnumber": "700",
+      "groupname": [ "Group 700" ]
+    },
+    "701": {
+      "groupnumber": "701",
+      "groupname": [ "Group 701" ]
+    },
+    "702": {
+      "groupnumber": "702",
+      "groupname": [ "Group 702" ]
+    },
+    "703": {
+      "groupnumber": "703",
+      "groupname": [ "Group 703" ]
+    },
+    "704": {
+      "groupnumber": "704",
+      "groupname": [ "Group 704" ]
+    },
+    "705": {
+      "groupnumber": "705",
+      "groupname": [ "Group 705" ]
+    },
+    "706": {
+      "groupnumber": "706",
+      "groupname": [ "Group 706" ]
+    },
+    "707": {
+      "groupnumber": "707",
+      "groupname": [ "Group 707" ]
+    },
+    "708": {
+      "groupnumber": "708",
+      "groupname": [ "Group 708" ]
+    },
+    "709": {
+      "groupnumber": "709",
+      "groupname": [ "Group 709" ]
+    },
+    "710": {
+      "groupnumber": "710",
+      "groupname": [ "Group 710" ]
+    },
+    "711": {
+      "groupnumber": "711",
+      "groupname": [ "Group 711" ]
+    },
+    "730": {
+      "groupnumber": "730",
+      "groupname": [ "Group 730" ]
+    },
+    "731": {
+      "groupnumber": "731",
+      "groupname": [ "Group 731" ]
+    },
+    "740": {
+      "groupnumber": "740",
+      "groupname": [ "Group 740" ]
+    },
+    "1061": {
+      "groupnumber": "1061",
+      "groupname": [ "Group 1061" ]
+    },
+    "1062": {
+      "groupnumber": "1062",
+      "groupname": [ "Group 1062" ]
+    },
+    "1131": {
+      "groupnumber": "1131",
+      "groupname": [ "Group 1131" ]
+    },
+    "1141": {
+      "groupnumber": "1141",
+      "groupname": [ "Group 1141" ]
+    },
+    "1142": {
+      "groupnumber": "1142",
+      "groupname": [ "Group 1142" ]
+    },
+    "1151": {
+      "groupnumber": "1151",
+      "groupname": [ "1.15" ]
+    },
+    "1153": {
+      "groupnumber": "1153",
+      "groupname": [ "Group 1153" ]
+    },
+    "1154": {
+      "groupnumber": "1154",
+      "groupname": [ "Group 1154" ]
+    },
+    "1155": {
+      "groupnumber": "1155",
+      "groupname": [ "Group 1155" ]
+    },
+    "1156": {
+      "groupnumber": "1156",
+      "groupname": [ "Group 1156" ]
+    },
+    "1157": {
+      "groupnumber": "1157",
+      "groupname": [ "Group 1157" ]
+    },
+    "1158": {
+      "groupnumber": "1158",
+      "groupname": [ "Group 1158" ]
+    },
+    "1159": {
+      "groupnumber": "1159",
+      "groupname": [ "Group 1159" ]
+    },
+    "1201": {
+      "groupnumber": "1201",
+      "groupname": [ "Group 1201" ]
+    },
+    "1202": {
+      "groupnumber": "1202",
+      "groupname": [ "Group 1202" ]
+    },
+    "1203": {
+      "groupnumber": "1203",
+      "groupname": [ "Group 1203" ]
+    },
+    "1204": {
+      "groupnumber": "1204",
+      "groupname": [ "Group 1204" ]
+    },
+    "15003": {
+      "groupnumber": "15003",
+      "groupname": [ "Group 15003" ]
     },
     "16000": {
       "groupnumber": "16000",
