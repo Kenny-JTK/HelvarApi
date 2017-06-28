@@ -2,7 +2,7 @@
 "HelvarHost" :"",
 "HelvarPortTCP": 50000,
 "HelvarPortUDP": 50001,
-"HelvarDesignerVersion": "4.2.25",
+"HelvarDesignerVersion": "5.3",
 "HelvarWebPort":5000,
 "RestPort" : 5001,
 "WorkGroup" : "untitled",

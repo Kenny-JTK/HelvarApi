@@ -30,7 +30,8 @@ router.get('/commands', function(req,res){
 router.get('/groups', function(req,res){
     var groepen = dbworkgroup.getData("/groups");
     
-    var Rest = "HTTP://" + UrlIp + ":" + RestPort + "/DLG";
-    res.render('groups', { title: Dalititle, name: Daliother, workgroup: Daligroup, ip: Dalirouter, groupsIN: groepen, ApiUrl: Rest });
+    var RestDLG = "HTTP://" + UrlIp + ":" + RestPort + "/DLG";
+    var RestRSG = "HTTP://" + UrlIp + ":" + RestPort + "/RSG";
+    res.render('groups', { title: Dalititle, name: Daliother, workgroup: Daligroup, ip: Dalirouter, groupsIN: groepen, ApiDLG: RestDLG , ApiRSG: RestRSG });
 });
 module.exports = router;

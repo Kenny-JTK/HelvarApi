@@ -31,16 +31,16 @@ var MSGaan = ">V:1,C:11,L:0,G:1,B:1,S:1,F:0#";
 var DiscoveredIp = [];
 var ipAddress = ip.address()
 var groups;
-var HelvarPortBroadCast;
+var HelvarPortBroadcast;
 
 //Set UDP Broadcast PORT from designer Version
 switch (HelvarDesignerVersion)
 {
     case "5.3":
-        HelvarPortBroadCast = 60000;
+        HelvarPortBroadcast = 60000;
         break;
     default:
-        HelvarPortBroadCast = 4250;
+        HelvarPortBroadcast = 4250;
 }
 
 //start
@@ -103,6 +103,8 @@ function WorkGroupName(){
                 HelvarTcpConn();
                 clientUDP.close();
                 print("Helvar : UDP Connection Closed");
+                dbinfo.delete('/');
+                dbworkgroup.delete('/');
                 dbinfo.push('/workgroup', WorkGroup);
                 dbinfo.push('/router', HelvarHost);
             }); 	
@@ -263,6 +265,13 @@ HVN.post('/DLG', function (req, res) {
     var msg = (">V:2,C:13,G:" + req.body.group + ",L:" + req.body.level + "#");
     client.write(msg);
     print("Helvar : Rest API command send (DLG) : "+msg);
+    res.redirect("http://" + ip.address + ":" + HelvarWebPort + "/groups");
+});
+
+HVN.post('/RSG', function (req, res) {
+    var msg = (">V:2,C:11,G:" + req.body.group + ",B:" + req.body.block + "S:"+ req.body.scene +"#");
+    client.write(msg);
+    print("Helvar : Rest API command send (RSG) : " + msg);
     res.redirect("http://" + ip.address + ":" + HelvarWebPort + "/groups");
 });
 

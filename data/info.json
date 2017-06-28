@@ -1,1 +1,1 @@
-{"groups":{"groups":["1","2","3","4","5","10","11","99"]},"workgroup":"Helvar Belgie","router":"192.168.1.2","routers":["1","2","4","5","6","16000"]}
+{"workgroup":"TestKast","router":"192.168.1.4","groups":{"groups":["1","2"]}}
