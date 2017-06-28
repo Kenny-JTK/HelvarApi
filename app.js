@@ -22,6 +22,7 @@ var debug = HelvarConfig.debug
 var HelvarHost = HelvarConfig.HelvarHost;
 var HelvarPortTCP = HelvarConfig.HelvarPortTCP;
 var HelvarPortUDP = HelvarConfig.HelvarPortUDP;
+var HelvarDesignerVersion = HelvarConfig.HelvarDesignerVersion;
 var HelvarWebPort = HelvarConfig.HelvarWebPort;
 var RestPort = HelvarConfig.RestPort;
 var WorkGroup = HelvarConfig.WorkGroup;
@@ -30,6 +31,17 @@ var MSGaan = ">V:1,C:11,L:0,G:1,B:1,S:1,F:0#";
 var DiscoveredIp = [];
 var ipAddress = ip.address()
 var groups;
+var HelvarPortBroadCast;
+
+//Set UDP Broadcast PORT from designer Version
+switch (HelvarDesignerVersion)
+{
+    case "5.3":
+        HelvarPortBroadCast = 60000;
+        break;
+    default:
+        HelvarPortBroadCast = 4250;
+}
 
 //start
 var app = express();
@@ -66,8 +78,8 @@ function WorkGroupDiscover(){
             };
         }
     });
-    //used to be clientDiscover.bind(4250,"255.255.255.255") 4250=Designer Port van de routers
-	clientDiscover.bind(4250);
+    //used to be clientDiscover.bind(4250,"255.255.255.255") 4250=Designer Port van de routers Designer 4 //Designer 5 => port 60000
+    clientDiscover.bind(HelvarPortBroadcast);
 };	
 	
 //Get WorkgroupName
@@ -149,12 +161,13 @@ function HelvarTcpConn(){
         print('HELVAR : TCP Client connection closed');
     });  
 };
-
+ 
 //handle all incommming tcp data
 function handlerTCP(data){
 	// create json string met alle correcte tekens
 		data = data.replace('>','{');
-		data = data.replace('?','{');
+        data = data.replace('?', '{');
+        data = data.replace('!', '{');
 		data = data.replace('V','"V');
 		data = data.replace(/:/g,'":"'); // /x/g staat voor alle voorkomende keren
 		data = data.replace(/,/g,'","');
@@ -223,7 +236,7 @@ function handlerTCP(data){
         if (jsonObj.C == 105) {
             dbworkgroup.push('/groups/' + jsonObj.G, { "groupnumber": jsonObj.G, "groupname": jsonObj.response });
             if (jsonObj.G == dbinfo.getData('/groups/groups[-1]')) {
-                client.write(">V:2,C:104@");
+                //client.write(">V:2,C:104@");
             }
         };
 

@@ -1,0 +1,2 @@
+C:\Users\k.stoepel\HelvarAPI\HelvarApi\obj\Debug\HelvarApi.njsprojResolveAssemblyReference.cache
+C:\Users\k.stoepel\HelvarAPI\HelvarApi\bin\Microsoft.NodejsTools.WebRole.dll
