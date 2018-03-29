@@ -262,17 +262,20 @@ HVN.use(bodyParser.urlencoded({
 HVN.use(bodyParser.json());
 
 HVN.post('/DLG', function (req, res) {
+    
     var msg = (">V:2,C:13,G:" + req.body.group + ",L:" + req.body.level + "#");
     client.write(msg);
-    print("Helvar : Rest API command send (DLG) : "+msg);
-    res.redirect("http://" + ip.address + ":" + HelvarWebPort + "/groups");
+    print("Helvar : Rest API command send (DLG) : " + msg);
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.redirect('back');
 });
 
 HVN.post('/RSG', function (req, res) {
     var msg = (">V:2,C:11,G:" + req.body.group + ",B:" + req.body.block + "S:"+ req.body.scene +"#");
     client.write(msg);
     print("Helvar : Rest API command send (RSG) : " + msg);
-    res.redirect("http://" + ip.address + ":" + HelvarWebPort + "/groups");
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.redirect('back');
 });
 
 HVN.get('/uit', function(req,res){
