@@ -9,7 +9,7 @@ var dbworkgroup = new jsondb("./data/workgroup", true, false);
 
 //for all views
 var Dalititle = "Helvar API";
-var Daliother = "Kenny"
+var Daliother = "Lighting Controls BVBA"
 var Daligroup = dbinfo.getData("/workgroup");
 var Dalirouter = dbinfo.getData("/router");
 var RestPort = dbconfig.getData("/RestPort");

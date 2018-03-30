@@ -15,7 +15,7 @@ var HelvarConfig = require("./helvar/HelvarConfig.json"); //import configuratie 
 var jsondb= require('node-json-db');
 var dbcomm = new jsondb("./data/commands",true,false);
 var dbinfo = new jsondb("./data/info",true,false);
-var dbworkgroup = new jsondb("./data/workgroup", true, false);
+var dbworkgroup = new jsondb("./data/workgroup", true, true);
 
 //variables
 var debug = HelvarConfig.debug
@@ -32,6 +32,8 @@ var DiscoveredIp = [];
 var ipAddress = ip.address()
 var groups;
 var HelvarPortBroadcast;
+var runOnce = 0;
+var groupsCount;
 
 //Set UDP Broadcast PORT from designer Version
 switch (HelvarDesignerVersion)
@@ -230,17 +232,30 @@ function handlerTCP(data){
 		if (jsonObj.C==165){
             dbinfo.push('/groups', { "groups": jsonObj.response });
 
-            //DO Query Group Names( with a interval of 500ms each)
+            //DO Query Group Names( with a interval of 1000ms each)
             jsonObj.response.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:105,G:" + value + "#") }, 1000 * index) });
         };
 
-        //Handle Query Groep Names
+        //Handle Query Group Names
         if (jsonObj.C == 105) {
             dbworkgroup.push('/groups/' + jsonObj.G, { "groupnumber": jsonObj.G, "groupname": jsonObj.response });
+
+            //DO Query Group devices (run at last response)
             if (jsonObj.G == dbinfo.getData('/groups/groups[-1]')) {
-                //client.write(">V:2,C:104@");
-            }
+                var groups = dbinfo.getData('/groups/groups');
+                print(groups);
+                //groups.forEach(function (value, index) { setTimeout(function () { client.write(">V:1,C:164,G:" + value + "#"); print(value); }, 1000 * index) });
+                for (var key in groups) {
+                    print(groups[key]);
+                };
+            };  
         };
+
+        //Handle Query Group devices
+        if (jsonObj.C == 164) {
+            dbworkgroup.push('/groups/' + jsonobj.G, { "devices": jsonobj.response });
+
+        }
 
 		//Check if message is from an IBASX group
 		if (HelvarConfig.Ibasx.indexOf(jsonObj.G) >= 0 && jsonObj.C == 11){
